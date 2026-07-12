@@ -7,6 +7,8 @@ Required:
     - resource_group_name
 Optional:
     - dapr_application_insights_connection_string
+    - dapr_application_insights_connection_string_key_vault_id (alternative to dapr_application_insights_connection_string - read from Key Vault instead)
+    - dapr_application_insights_connection_string_key_vault_secret_name (alternative to dapr_application_insights_connection_string - read from Key Vault instead)
     - infrastructure_resource_group_name
     - infrastructure_subnet_id
     - internal_load_balancer_enabled
@@ -27,19 +29,21 @@ Optional:
 EOT
 
   type = map(object({
-    location                                    = string
-    name                                        = string
-    resource_group_name                         = string
-    dapr_application_insights_connection_string = optional(string)
-    infrastructure_resource_group_name          = optional(string)
-    infrastructure_subnet_id                    = optional(string)
-    internal_load_balancer_enabled              = optional(bool) # Default: false
-    log_analytics_workspace_id                  = optional(string)
-    logs_destination                            = optional(string)
-    mutual_tls_enabled                          = optional(bool) # Default: false
-    public_network_access                       = optional(string)
-    tags                                        = optional(map(string))
-    zone_redundancy_enabled                     = optional(bool) # Default: false
+    location                                                          = string
+    name                                                              = string
+    resource_group_name                                               = string
+    dapr_application_insights_connection_string                       = optional(string)
+    dapr_application_insights_connection_string_key_vault_id          = optional(string)
+    dapr_application_insights_connection_string_key_vault_secret_name = optional(string)
+    infrastructure_resource_group_name                                = optional(string)
+    infrastructure_subnet_id                                          = optional(string)
+    internal_load_balancer_enabled                                    = optional(bool) # Default: false
+    log_analytics_workspace_id                                        = optional(string)
+    logs_destination                                                  = optional(string)
+    mutual_tls_enabled                                                = optional(bool) # Default: false
+    public_network_access                                             = optional(string)
+    tags                                                              = optional(map(string))
+    zone_redundancy_enabled                                           = optional(bool) # Default: false
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string

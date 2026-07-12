@@ -1,10 +1,15 @@
+data "azurerm_key_vault_secret" "dapr_application_insights_connection_string" {
+  for_each     = { for k, v in var.container_app_environments : k => v if v.dapr_application_insights_connection_string_key_vault_id != null && v.dapr_application_insights_connection_string_key_vault_secret_name != null }
+  name         = each.value.dapr_application_insights_connection_string_key_vault_secret_name
+  key_vault_id = each.value.dapr_application_insights_connection_string_key_vault_id
+}
 resource "azurerm_container_app_environment" "container_app_environments" {
   for_each = var.container_app_environments
 
   location                                    = each.value.location
   name                                        = each.value.name
   resource_group_name                         = each.value.resource_group_name
-  dapr_application_insights_connection_string = each.value.dapr_application_insights_connection_string
+  dapr_application_insights_connection_string = each.value.dapr_application_insights_connection_string != null ? each.value.dapr_application_insights_connection_string : try(data.azurerm_key_vault_secret.dapr_application_insights_connection_string[each.key].value, null)
   infrastructure_resource_group_name          = each.value.infrastructure_resource_group_name
   infrastructure_subnet_id                    = each.value.infrastructure_subnet_id
   internal_load_balancer_enabled              = each.value.internal_load_balancer_enabled
