@@ -1,3 +1,7 @@
+output "container_app_environments_id" {
+  description = "Map of id values across all container_app_environments, keyed the same as var.container_app_environments"
+  value       = { for k, v in azurerm_container_app_environment.container_app_environments : k => v.id }
+}
 output "container_app_environments_custom_domain_verification_id" {
   description = "Map of custom_domain_verification_id values across all container_app_environments, keyed the same as var.container_app_environments"
   value       = { for k, v in azurerm_container_app_environment.container_app_environments : k => v.custom_domain_verification_id }
