@@ -24,7 +24,7 @@ resource "azurerm_container_app_environment" "container_app_environments" {
   }
 
   dynamic "workload_profile" {
-    for_each = each.value.workload_profile != null ? [each.value.workload_profile] : []
+    for_each = each.value.workload_profile != null ? each.value.workload_profile : []
     content {
       maximum_count         = workload_profile.value.maximum_count
       minimum_count         = workload_profile.value.minimum_count

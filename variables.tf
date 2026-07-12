@@ -44,12 +44,12 @@ EOT
       identity_ids = optional(set(string))
       type         = string
     }))
-    workload_profile = optional(object({
+    workload_profile = optional(list(object({
       maximum_count         = optional(number)
       minimum_count         = optional(number)
       name                  = string
       workload_profile_type = string
-    }))
+    })))
   }))
 }
 
