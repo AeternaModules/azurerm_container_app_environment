@@ -37,13 +37,13 @@ EOT
     dapr_application_insights_connection_string_key_vault_secret_name = optional(string)
     infrastructure_resource_group_name                                = optional(string)
     infrastructure_subnet_id                                          = optional(string)
-    internal_load_balancer_enabled                                    = optional(bool) # Default: false
+    internal_load_balancer_enabled                                    = optional(bool)
     log_analytics_workspace_id                                        = optional(string)
     logs_destination                                                  = optional(string)
-    mutual_tls_enabled                                                = optional(bool) # Default: false
+    mutual_tls_enabled                                                = optional(bool)
     public_network_access                                             = optional(string)
     tags                                                              = optional(map(string))
-    zone_redundancy_enabled                                           = optional(bool) # Default: false
+    zone_redundancy_enabled                                           = optional(bool)
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string
