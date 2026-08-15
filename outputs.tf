@@ -21,7 +21,7 @@ output "container_app_environments_docker_bridge_cidr" {
 }
 output "container_app_environments_identity" {
   description = "Map of identity values across all container_app_environments, keyed the same as var.container_app_environments"
-  value       = { for k, v in azurerm_container_app_environment.container_app_environments : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_container_app_environment.container_app_environments : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "container_app_environments_infrastructure_resource_group_name" {
   description = "Map of infrastructure_resource_group_name values across all container_app_environments, keyed the same as var.container_app_environments"
